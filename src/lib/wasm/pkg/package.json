@@ -1,0 +1,14 @@
+{
+  "name": "vstorage-wasm",
+  "version": "0.1.0",
+  "files": [
+    "vstorage_wasm_bg.wasm",
+    "vstorage_wasm.js",
+    "vstorage_wasm.d.ts"
+  ],
+  "module": "vstorage_wasm.js",
+  "types": "vstorage_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
