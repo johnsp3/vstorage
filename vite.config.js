@@ -1,23 +1,41 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import wasmPack from '@wasm-tool/wasm-pack-plugin';
 
 export default defineConfig({
 	plugins: [
-		sveltekit(),
-		wasmPack({
-			crateDirectory: './src/lib/wasm',
-			watchDirectories: ['./src/lib/wasm/src']
-		})
+		sveltekit()
 	],
 	server: {
 		port: 3000,
-		host: true
+		host: true,
+		fs: {
+			allow: ['..']
+		}
 	},
 	optimizeDeps: {
-		exclude: ['vstorage-wasm']
+		exclude: ['vstorage-wasm'],
+		include: ['@sveltejs/kit']
 	},
 	build: {
-		target: 'esnext'
+		target: 'esnext',
+		minify: 'terser',
+		terserOptions: {
+			compress: {
+				drop_console: true,
+				drop_debugger: true
+			}
+		},
+		rollupOptions: {
+			output: {
+				manualChunks: {
+					vendor: ['svelte']
+				}
+			}
+		},
+		chunkSizeWarningLimit: 1000
+	},
+	preview: {
+		port: 3000,
+		host: true
 	}
 });

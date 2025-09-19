@@ -1,7 +1,23 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	
-	let formData = {
+	interface FormData {
+		name: string;
+		email: string;
+		company: string;
+		phone: string;
+		message: string;
+		interest: string;
+	}
+	
+	interface FormErrors {
+		name?: string;
+		email?: string;
+		company?: string;
+		message?: string;
+	}
+	
+	let formData: FormData = {
 		name: '',
 		email: '',
 		company: '',
@@ -12,7 +28,7 @@
 	
 	let isSubmitting = false;
 	let submitStatus = '';
-	let errors = {};
+	let errors: FormErrors = {};
 	
 	const interestOptions = [
 		'Enterprise Security',
@@ -23,7 +39,7 @@
 		'Other'
 	];
 	
-	function validateForm() {
+	function validateForm(): boolean {
 		errors = {};
 		
 		if (!formData.name.trim()) {
@@ -47,7 +63,7 @@
 		return Object.keys(errors).length === 0;
 	}
 	
-	async function handleSubmit(event) {
+	async function handleSubmit(event: Event): Promise<void> {
 		event.preventDefault();
 		
 		if (!validateForm()) {
