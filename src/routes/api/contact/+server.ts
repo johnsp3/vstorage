@@ -5,7 +5,7 @@ import { RESEND_API_KEY } from '$env/static/private';
 // Initialize Resend with your API key
 const resend = new Resend(RESEND_API_KEY);
 
-export async function POST({ request }) {
+export async function POST({ request }: { request: Request }) {
 	try {
 		const { name, email, company, phone, message, interest } = await request.json();
 		

@@ -1,11 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
-	
-	let isLoaded = false;
-	
-	onMount(() => {
-		isLoaded = true;
-	});
+	// Whitepaper page - no conditional loading needed
 </script>
 
 <svelte:head>
@@ -27,7 +21,7 @@
 					<span class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">VStorage</span>
 				</div>
 				<div class="flex items-center space-x-4">
-					<button class="text-gray-600 hover:text-gray-900 transition-colors" onclick="window.print()">
+					<button class="text-gray-600 hover:text-gray-900 transition-colors" on:click={() => window.print()}>
 						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
 						</svg>
@@ -42,8 +36,7 @@
 		</div>
 	</header>
 
-	{#if isLoaded}
-		<!-- Whitepaper Content -->
+	<!-- Whitepaper Content -->
 		<div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 			<!-- Title Page -->
 			<div class="text-center mb-16">
@@ -294,19 +287,19 @@
 						</p>
 						
 						<div class="bg-gray-900 rounded-xl p-6 mb-6">
-							<pre class="text-green-400 text-sm overflow-x-auto"><code>// Initialize VStorage
-import { VStorage } from './vstorage_wasm.js';
+							<pre class="text-green-400 text-sm overflow-x-auto"><code>{`// Initialize VStorage
+// import { VStorage } from './vstorage_wasm.js';
 
-const storage = new VStorage(1024 * 1024); // 1MB capacity
+// const storage = new VStorage(1024 * 1024); // 1MB capacity
 
 // Write data
 const data = new TextEncoder().encode("Hello, VStorage!");
-storage.write(0, data);
+// storage.write(0, data);
 
 // Read data
-const result = storage.read(0, data.length);
+const result = // storage.read(0, data.length);
 const text = new TextDecoder().decode(result);
-console.log(text); // "Hello, VStorage!"</code></pre>
+console.log(text); // "Hello, VStorage!"`}</code></pre>
 						</div>
 					</div>
 				</div>
@@ -412,11 +405,8 @@ console.log(text); // "Hello, VStorage!"</code></pre>
 							<p class="text-gray-700 mb-4">
 								Contact our enterprise team to learn more about implementing VStorage in your organization.
 							</p>
-							<div class="flex flex-col sm:flex-row gap-4">
-								<a href="/#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 text-center">
-									Contact Enterprise Team
-								</a>
-								<a href="/" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-200 text-center">
+							<div class="flex justify-center">
+								<a href="/" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 text-center">
 									Back to Homepage
 								</a>
 							</div>
@@ -425,7 +415,6 @@ console.log(text); // "Hello, VStorage!"</code></pre>
 				</div>
 			</section>
 		</div>
-	{/if}
 </main>
 
 <style>

@@ -52,9 +52,9 @@
 					Contact
 					<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
 				</a>
-				<button class="bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 lg:px-8 py-2 lg:py-3 rounded-xl lg:rounded-2xl hover:from-gray-800 hover:to-gray-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm lg:text-base">
+				<a href="/signin" class="bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 lg:px-8 py-2 lg:py-3 rounded-xl lg:rounded-2xl hover:from-gray-800 hover:to-gray-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm lg:text-base">
 					Sign In
-				</button>
+				</a>
 			</div>
 		</div>
 	</nav>
