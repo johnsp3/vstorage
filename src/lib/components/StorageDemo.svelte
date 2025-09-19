@@ -81,13 +81,13 @@
 	}
 </script>
 
-<section class="py-16 bg-gradient-to-b from-gray-50 to-white">
-	<div class="max-w-4xl mx-auto px-6">
-		<div class="text-center mb-12">
-			<h2 class="text-4xl font-bold text-gray-900 mb-4">
+<section class="py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-gray-50 to-white">
+	<div class="max-w-4xl mx-auto px-4 sm:px-6">
+		<div class="text-center mb-8 sm:mb-12">
+			<h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
 				WebAssembly Storage Demo
 			</h2>
-			<p class="text-xl text-gray-600">
+			<p class="text-base sm:text-lg lg:text-xl text-gray-600 px-4">
 				Experience high-performance storage operations powered by Rust WebAssembly
 			</p>
 		</div>
@@ -107,30 +107,30 @@
 				{/if}
 			</div>
 		{:else}
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
 				<!-- Storage Stats -->
-				<div class="bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-200">
-					<h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Storage Statistics</h3>
+				<div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg border border-gray-200">
+					<h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">Storage Statistics</h3>
 					
-					<div class="space-y-3 lg:space-y-4">
-						<div class="flex justify-between items-center p-3 lg:p-4 bg-gray-50 rounded-lg">
-							<span class="font-medium text-gray-700 text-sm lg:text-base">Total Capacity</span>
-							<span class="font-bold text-blue-600 text-sm lg:text-base">{capacity} bytes</span>
+					<div class="space-y-2 sm:space-y-3 lg:space-y-4">
+						<div class="flex justify-between items-center p-2 sm:p-3 lg:p-4 bg-gray-50 rounded-lg">
+							<span class="font-medium text-gray-700 text-xs sm:text-sm lg:text-base">Total Capacity</span>
+							<span class="font-bold text-blue-600 text-xs sm:text-sm lg:text-base">{capacity} bytes</span>
 						</div>
 						
-						<div class="flex justify-between items-center p-3 lg:p-4 bg-gray-50 rounded-lg">
-							<span class="font-medium text-gray-700 text-sm lg:text-base">Used Space</span>
-							<span class="font-bold text-green-600 text-sm lg:text-base">{used} bytes</span>
+						<div class="flex justify-between items-center p-2 sm:p-3 lg:p-4 bg-gray-50 rounded-lg">
+							<span class="font-medium text-gray-700 text-xs sm:text-sm lg:text-base">Used Space</span>
+							<span class="font-bold text-green-600 text-xs sm:text-sm lg:text-base">{used} bytes</span>
 						</div>
 						
-						<div class="flex justify-between items-center p-3 lg:p-4 bg-gray-50 rounded-lg">
-							<span class="font-medium text-gray-700 text-sm lg:text-base">Available</span>
-							<span class="font-bold text-purple-600 text-sm lg:text-base">{capacity - used} bytes</span>
+						<div class="flex justify-between items-center p-2 sm:p-3 lg:p-4 bg-gray-50 rounded-lg">
+							<span class="font-medium text-gray-700 text-xs sm:text-sm lg:text-base">Available</span>
+							<span class="font-bold text-purple-600 text-xs sm:text-sm lg:text-base">{capacity - used} bytes</span>
 						</div>
 						
-						<div class="w-full bg-gray-200 rounded-full h-2 lg:h-3">
+						<div class="w-full bg-gray-200 rounded-full h-2 sm:h-2 lg:h-3">
 							<div 
-								class="bg-gradient-to-r from-blue-500 to-purple-600 h-2 lg:h-3 rounded-full transition-all duration-300"
+								class="bg-gradient-to-r from-blue-500 to-purple-600 h-2 sm:h-2 lg:h-3 rounded-full transition-all duration-300"
 								style="width: {(used / capacity) * 100}%"
 							></div>
 						</div>
@@ -138,32 +138,32 @@
 				</div>
 
 				<!-- Operations Panel -->
-				<div class="bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-200">
-					<h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Storage Operations</h3>
+				<div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg border border-gray-200">
+					<h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">Storage Operations</h3>
 					
-					<div class="space-y-4 lg:space-y-6">
+					<div class="space-y-3 sm:space-y-4 lg:space-y-6">
 						<!-- Write Operation -->
-						<div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-							<label for="input-data" class="block text-sm font-medium text-gray-700 mb-3">Write Data</label>
-							<div class="space-y-3">
+						<div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+							<label for="input-data" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Write Data</label>
+							<div class="space-y-2 sm:space-y-3">
 								<input 
 									id="input-data"
 									type="text" 
 									bind:value={inputData}
 									placeholder="Enter data to store..."
-									class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+									class="w-full px-2 sm:px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 								/>
-								<div class="grid grid-cols-2 gap-3">
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
 									<input 
 										id="write-offset"
 										type="number" 
 										bind:value={offset}
 										placeholder="Offset"
-										class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										class="w-full px-2 sm:px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 									/>
 									<button 
 										on:click={writeData}
-										class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-center"
+										class="w-full px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-center text-sm sm:text-base"
 									>
 										Write
 									</button>
@@ -172,28 +172,28 @@
 						</div>
 
 						<!-- Read Operation -->
-						<div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-							<label for="read-offset" class="block text-sm font-medium text-gray-700 mb-3">Read Data</label>
-							<div class="space-y-3">
-								<div class="grid grid-cols-2 gap-3">
+						<div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+							<label for="read-offset" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Read Data</label>
+							<div class="space-y-2 sm:space-y-3">
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
 									<input 
 										id="read-offset"
 										type="number" 
 										bind:value={offset}
 										placeholder="Offset"
-										class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										class="w-full px-2 sm:px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 									/>
 									<input 
 										id="read-length"
 										type="number" 
 										bind:value={readLength}
 										placeholder="Length"
-										class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										class="w-full px-2 sm:px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 									/>
 								</div>
 								<button 
 									on:click={readData}
-									class="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-center"
+									class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-center text-sm sm:text-base"
 								>
 									Read
 								</button>
@@ -201,18 +201,18 @@
 						</div>
 
 						<!-- Utility Operations -->
-						<div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-							<div class="text-sm font-medium text-gray-700 mb-3">Utility Operations</div>
-							<div class="grid grid-cols-2 gap-3">
+						<div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+							<div class="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Utility Operations</div>
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
 								<button 
 									on:click={clearStorage}
-									class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center"
+									class="w-full px-3 sm:px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center text-sm sm:text-base"
 								>
 									Clear
 								</button>
 								<button 
 									on:click={optimizeStorage}
-									class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium text-center"
+									class="w-full px-3 sm:px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium text-center text-sm sm:text-base"
 								>
 									Optimize
 								</button>
@@ -224,9 +224,9 @@
 
 			<!-- Results -->
 			{#if result}
-				<div class="mt-8 bg-gray-50 rounded-2xl p-6 border border-gray-200">
-					<h4 class="text-lg font-semibold text-gray-900 mb-3">Operation Result</h4>
-					<div class="font-mono text-sm text-gray-700 bg-white rounded-lg p-4 border">
+				<div class="mt-6 sm:mt-8 bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-200">
+					<h4 class="text-base sm:text-lg font-semibold text-gray-900 mb-2 sm:mb-3">Operation Result</h4>
+					<div class="font-mono text-xs sm:text-sm text-gray-700 bg-white rounded-lg p-3 sm:p-4 border">
 						{result}
 					</div>
 				</div>
