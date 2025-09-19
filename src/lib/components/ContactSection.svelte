@@ -181,6 +181,7 @@
 						<input
 							type="text"
 							id="name"
+							name="name"
 							bind:value={formData.name}
 							class="w-full px-3 sm:px-4 py-3 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base {errors.name ? 'border-red-300' : ''}"
 							placeholder="Enter your full name"
@@ -198,6 +199,7 @@
 						<input
 							type="email"
 							id="email"
+							name="email"
 							bind:value={formData.email}
 							class="w-full px-3 sm:px-4 py-3 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base {errors.email ? 'border-red-300' : ''}"
 							placeholder="your.email@company.com"
@@ -215,6 +217,7 @@
 						<input
 							type="text"
 							id="company"
+							name="company"
 							bind:value={formData.company}
 							class="w-full px-3 sm:px-4 py-3 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base {errors.company ? 'border-red-300' : ''}"
 							placeholder="Your company name"
@@ -232,6 +235,7 @@
 						<input
 							type="tel"
 							id="phone"
+							name="phone"
 							bind:value={formData.phone}
 							class="w-full px-3 sm:px-4 py-3 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base"
 							placeholder="+41 44 202 53 89"
@@ -245,6 +249,7 @@
 						</label>
 						<select
 							id="interest"
+							name="interest"
 							bind:value={formData.interest}
 							class="w-full px-3 sm:px-4 py-3 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base"
 						>
@@ -262,6 +267,7 @@
 						</label>
 						<textarea
 							id="message"
+							name="message"
 							bind:value={formData.message}
 							rows="4"
 							class="w-full px-3 sm:px-4 py-3 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none text-base {errors.message ? 'border-red-300' : ''}"
