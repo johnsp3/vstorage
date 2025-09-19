@@ -20,10 +20,10 @@ build/
 
 # Rust/WebAssembly
 src/lib/wasm/target/
-src/lib/wasm/pkg/
-*.wasm
-*.wasm.d.ts
-*.wasm.js
+# Note: pkg/ directory is needed for production builds
+# *.wasm
+# *.wasm.d.ts
+# *.wasm.js
 
 # IDE and editor files
 .vscode/
