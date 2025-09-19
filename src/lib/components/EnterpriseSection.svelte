@@ -98,13 +98,10 @@
 			<p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
 				Join leading organizations who trust VStorage for their most sensitive data and critical operations.
 			</p>
-			<div class="flex flex-col sm:flex-row gap-4 justify-center">
-				<button class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-200">
-					Schedule Demo
-				</button>
-				<button class="border border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200">
-					Download Whitepaper
-				</button>
+			<div class="flex justify-center">
+				<a href="/whitepaper" target="_blank" class="border border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200">
+					View Whitepaper
+				</a>
 			</div>
 		</div>
 		
