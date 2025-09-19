@@ -23,7 +23,6 @@
     "vite": "^4.5.0"
   },
   "dependencies": {
-    "@wasm-tool/wasm-pack-plugin": "^1.6.0",
     "resend": "^6.1.0"
   }
 }

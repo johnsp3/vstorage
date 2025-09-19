@@ -4,7 +4,6 @@ High-performance storage solution built with cutting-edge web technologies.
 
 ## Technology Stack
 
-- **WebAssembly (Rust)** - High-performance storage operations
 - **Svelte** - Modern, reactive frontend framework
 - **Vite** - Lightning-fast build tool
 - **Tailwind CSS** - Utility-first CSS framework
@@ -12,7 +11,6 @@ High-performance storage solution built with cutting-edge web technologies.
 
 ## Features
 
-- ⚡ **WebAssembly-powered storage** - Near-native performance
 - 🎨 **Modern UI** - Beautiful, responsive interface
 - 📊 **Real-time metrics** - Performance monitoring
 - 🔧 **File operations** - Upload, download, and manage data
@@ -23,8 +21,6 @@ High-performance storage solution built with cutting-edge web technologies.
 ### Prerequisites
 
 - Node.js 18+
-- Rust (for WebAssembly compilation)
-- wasm-pack
 - Resend API key
 
 ### Installation
@@ -60,14 +56,6 @@ When deploying to Vercel, add these environment variables in your Vercel dashboa
 - `NEXT_PUBLIC_SITE_URL` - Your production domain URL
 - `NODE_ENV` - Set to `production` for production builds
 
-### Build WebAssembly
-
-```bash
-cd src/lib/wasm
-wasm-pack build --target web --out-dir pkg
-cd ../../..
-```
-
 ### Development Server
 
 ```bash
@@ -88,12 +76,11 @@ The application is configured for Vercel deployment. Simply push to your reposit
 
 ## Architecture
 
-VStorage uses a hybrid architecture:
+VStorage uses a modern web architecture:
 
 1. **Frontend**: Svelte components with Tailwind CSS
-2. **Storage Engine**: Rust WebAssembly module for high-performance operations
-3. **API Layer**: JavaScript bridge between frontend and WASM
-4. **Deployment**: Vercel with Node.js runtime
+2. **API Layer**: SvelteKit API routes for backend functionality
+3. **Deployment**: Vercel with Node.js runtime
 
 ## Performance
 
