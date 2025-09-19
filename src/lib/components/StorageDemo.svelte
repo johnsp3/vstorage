@@ -202,7 +202,7 @@
 
 						<!-- Utility Operations -->
 						<div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-							<label class="block text-sm font-medium text-gray-700 mb-3">Utility Operations</label>
+							<div class="text-sm font-medium text-gray-700 mb-3">Utility Operations</div>
 							<div class="grid grid-cols-2 gap-3">
 								<button 
 									on:click={clearStorage}
