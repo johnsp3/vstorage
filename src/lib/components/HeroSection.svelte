@@ -2,10 +2,19 @@
 	import { onMount } from 'svelte';
 	
 	let mounted = false;
+	let mobileMenuOpen = false;
 	
 	onMount(() => {
 		mounted = true;
 	});
+	
+	function toggleMobileMenu() {
+		mobileMenuOpen = !mobileMenuOpen;
+	}
+	
+	function closeMobileMenu() {
+		mobileMenuOpen = false;
+	}
 </script>
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -28,10 +37,22 @@
 			</div>
 			
 			<!-- Mobile menu button -->
-			<button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Open menu">
-				<svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-				</svg>
+			<button 
+				class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" 
+				aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+				on:click={toggleMobileMenu}
+			>
+				{#if mobileMenuOpen}
+					<!-- Close icon (X) -->
+					<svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+					</svg>
+				{:else}
+					<!-- Hamburger icon -->
+					<svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+					</svg>
+				{/if}
 			</button>
 			
 			<!-- Desktop navigation -->
@@ -57,6 +78,49 @@
 				</a>
 			</div>
 		</div>
+		
+		<!-- Mobile Navigation Menu -->
+		{#if mobileMenuOpen}
+			<div class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200/50 shadow-lg z-40">
+				<div class="px-4 py-6 space-y-4">
+					<a 
+						href="#features" 
+						class="block text-gray-700 hover:text-gray-900 transition-colors font-medium py-2 border-b border-gray-100"
+						on:click={closeMobileMenu}
+					>
+						Features
+					</a>
+					<a 
+						href="#security" 
+						class="block text-gray-700 hover:text-gray-900 transition-colors font-medium py-2 border-b border-gray-100"
+						on:click={closeMobileMenu}
+					>
+						Security
+					</a>
+					<a 
+						href="#enterprise" 
+						class="block text-gray-700 hover:text-gray-900 transition-colors font-medium py-2 border-b border-gray-100"
+						on:click={closeMobileMenu}
+					>
+						Enterprise
+					</a>
+					<a 
+						href="#contact" 
+						class="block text-gray-700 hover:text-gray-900 transition-colors font-medium py-2 border-b border-gray-100"
+						on:click={closeMobileMenu}
+					>
+						Contact
+					</a>
+					<a 
+						href="/signin" 
+						class="block bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 py-3 rounded-xl hover:from-gray-800 hover:to-gray-700 transition-all duration-300 font-semibold text-center mt-4"
+						on:click={closeMobileMenu}
+					>
+						Sign In
+					</a>
+				</div>
+			</div>
+		{/if}
 	</nav>
 	
 	<!-- Hero Content -->
