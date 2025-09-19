@@ -41,10 +41,24 @@ Create a `.env` file in the root directory:
 # Resend API Configuration
 RESEND_API_KEY=your_resend_api_key_here
 
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+
+# Environment
+NODE_ENV=production
+
 # Email Configuration
 FROM_EMAIL=noreply@vstorage.com
 TO_EMAIL=enterprise@vstorage.com
 ```
+
+### Vercel Deployment Environment Variables
+
+When deploying to Vercel, add these environment variables in your Vercel dashboard:
+
+- `RESEND_API_KEY` - Your Resend API key for email functionality
+- `NEXT_PUBLIC_SITE_URL` - Your production domain URL
+- `NODE_ENV` - Set to `production` for production builds
 
 ### Build WebAssembly
 
