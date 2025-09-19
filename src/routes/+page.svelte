@@ -2,6 +2,7 @@
 	import HeroSection from '$lib/components/HeroSection.svelte';
 	import FeaturesSection from '$lib/components/FeaturesSection.svelte';
 	import AppPreview from '$lib/components/AppPreview.svelte';
+	import StorageDemo from '$lib/components/StorageDemo.svelte';
 	import SecuritySection from '$lib/components/SecuritySection.svelte';
 	import EnterpriseSection from '$lib/components/EnterpriseSection.svelte';
 	import ContactSection from '$lib/components/ContactSection.svelte';
@@ -17,6 +18,7 @@
 	<HeroSection />
 	<FeaturesSection />
 	<AppPreview />
+	<StorageDemo />
 	<SecuritySection />
 	<EnterpriseSection />
 	<ContactSection />
