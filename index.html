@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="vStorage - Swiss cloud storage infrastructure built by engineers. S3-compatible object storage with 99.9% uptime SLA, GDPR compliant, 100% Swiss hosted.">
+    <meta name="keywords" content="Swiss cloud storage, S3 compatible storage, enterprise cloud storage, GDPR compliant storage, Swiss data center">
+    <meta name="author" content="vStorage GmbH">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="vStorage - Swiss Cloud Infrastructure Built by Engineers">
+    <meta property="og:description" content="S3-compatible object storage on Swiss infrastructure for European enterprises. 99.9% uptime SLA, GDPR compliant.">
+    <meta property="og:site_name" content="vStorage">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇨🇭</text></svg>">
+
+    <title>vStorage - Swiss Cloud Infrastructure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #FAFBFC;
+            --bg-secondary: #FFFFFF;
+            --accent: #0066FF;
+            --accent-light: #3B82F6;
+            --accent-ultra-light: #EFF6FF;
+            --text-primary: #0F172A;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --border: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.12);
+            --gradient-blue: linear-gradient(135deg, #0066FF 0%, #3B82F6 100%);
+            --gradient-purple: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            --gradient-green: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --swiss-red: #FF0000;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a:focus {
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-blue);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after, .nav-links a:focus::after {
+            width: 100%;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: #15803D;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22C55E;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+            will-change: transform;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%);
+            animation: float-reverse 25s infinite ease-in-out;
+            will-change: transform;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(0.9); }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-content h1 span {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.1s backwards;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 44px;
+            min-height: 44px;
+            background: var(--accent-ultra-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .trust-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trust-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .trust-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cta-section {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            min-height: 44px;
+            min-width: 44px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.35);
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover, .btn-outline:focus {
+            background: var(--bg-primary);
+            border-color: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .dashboard-preview {
+            position: relative;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .browser-window {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .browser-window:hover {
+            transform: translateY(-5px);
+        }
+
+        .browser-header {
+            background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .browser-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .browser-dot.red { background: #FF5F57; }
+        .browser-dot.yellow { background: #FFBD2E; }
+        .browser-dot.green { background: #28CA42; }
+
+        .dashboard-content {
+            padding: 1.5rem;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-change {
+            font-size: 0.75rem;
+            color: #10B981;
+            margin-top: 0.25rem;
+        }
+
+        .metric-change.negative {
+            color: #EF4444;
+        }
+
+        .dashboard-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .activity-feed {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .feed-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .feed-filter {
+            font-size: 0.85rem;
+            color: var(--accent);
+            cursor: pointer;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: var(--bg-primary);
+            margin: 0 -0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-ultra-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .storage-overview {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .storage-chart {
+            margin: 1rem 0;
+            height: 150px;
+            background: linear-gradient(180deg, var(--accent-ultra-light) 0%, white 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .storage-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 57%;
+            background: var(--gradient-blue);
+            border-radius: 8px 8px 0 0;
+            animation: grow 1s ease-out forwards;
+            will-change: height;
+        }
+
+        @keyframes grow {
+            from { height: 0; }
+            to { height: 57%; }
+        }
+
+        .storage-details {
+            margin-top: 1rem;
+        }
+
+        .storage-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .storage-label {
+            color: var(--text-secondary);
+        }
+
+        .storage-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .infrastructure, .how-it-works, .architecture {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent-ultra-light);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .infrastructure-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .infrastructure-content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .infrastructure-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .infrastructure-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .infra-stat {
+            padding: 1.25rem;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .infra-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .infra-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .network-diagram {
+            background: linear-gradient(135deg, #F8FAFC 0%, #E0E7FF 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .network-nodes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .network-node {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .network-node:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .node-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-blue);
+            border-radius: 12px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .node-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .node-status {
+            font-size: 0.8rem;
+            color: #10B981;
+            font-weight: 500;
+        }
+
+        .security-features {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .security-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .security-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .security-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .security-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .security-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            border: 2px solid #BBF7D0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .security-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .security-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .security-specs {
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .spec-item strong {
+            color: var(--text-primary);
+        }
+
+        .arch-visual {
+            background: linear-gradient(135deg, #F8FAFC 0%, #EDE9FE 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .arch-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .arch-layer {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .layer-label {
+            position: absolute;
+            top: -12px;
+            left: 2rem;
+            background: white;
+            padding: 0 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .layer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .tech-item:hover {
+            background: var(--accent-ultra-light);
+            transform: translateX(5px);
+        }
+
+        .tech-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .compliance {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+        }
+
+        .compliance-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .compliance-badge {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .compliance-badge:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .badge-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--gradient-blue);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .badge-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .badge-status {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.25rem 0.75rem;
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: #15803D;
+            font-weight: 600;
+        }
+
+        .badge-pending {
+            background: #FEF3C7;
+            border-color: #FCD34D;
+            color: #92400E;
+        }
+
+        footer {
+            padding: 4rem 2rem 2rem;
+            background: var(--text-primary);
+            color: white;
+            margin-top: 6rem;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container,
+            .infrastructure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-main {
+                grid-template-columns: 1fr;
+            }
+
+            .network-nodes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .metrics-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .network-nodes {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-light);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo" aria-label="vStorage">vStorage</div>
+            <div class="nav-links">
+                <a href="#how-it-works" aria-label="How It Works section">How It Works</a>
+                <a href="#infrastructure" aria-label="Infrastructure section">Infrastructure</a>
+                <a href="#security" aria-label="Security section">Security</a>
+                <a href="#docs" aria-label="Documentation section">Documentation</a>
+                <div class="status-indicator" role="status" aria-label="System operational">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Operational • v2.3</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 id="hero-heading">Swiss Cloud Storage <span>Built by Engineers</span></h1>
+                    <p class="hero-subtitle">
+                        Founded by engineers with advanced degrees in computer science.
+                        We provide S3-compatible object storage on Swiss infrastructure for European enterprises.
+                    </p>
+
+                    <div class="trust-badges" role="list" aria-label="Key features">
+                        <div class="trust-badge" role="listitem">
+                            <div class="trust-icon" aria-hidden="true">🏢</div>
+                            <div class="trust-text">
+                                <span class="trust-value">Enterprise</span>
+                                <span class="trust-label">Grade Infrastructure</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge" role="listitem">
+                            <div class="trust-icon" aria-hidden="true">⚡</div>
+                            <div class="trust-text">
+                                <span class="trust-value">99.9%</span>
+                                <span class="trust-label">Uptime SLA</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge" role="listitem">
+                            <div class="trust-icon" aria-hidden="true">🇨🇭</div>
+                            <div class="trust-text">
+                                <span class="trust-value">100%</span>
+                                <span class="trust-label">Swiss Hosted</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-section">
+                        <a href="#contact" class="btn btn-primary" aria-label="Contact us to get started">
+                            Contact Us
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="dashboard-preview" aria-label="Dashboard preview mockup">
+                    <div class="browser-window">
+                        <div class="browser-header" aria-label="Browser window controls">
+                            <div class="browser-controls">
+                                <span class="browser-dot red" aria-label="Close"></span>
+                                <span class="browser-dot yellow" aria-label="Minimize"></span>
+                                <span class="browser-dot green" aria-label="Maximize"></span>
+                            </div>
+                        </div>
+                        <div class="dashboard-content">
+                            <div class="metrics-row" role="list" aria-label="System metrics">
+                                <div class="metric-card" role="listitem">
+                                    <div class="metric-label">Storage Used</div>
+                                    <div class="metric-value">287.4 TB</div>
+                                    <div class="metric-change">↑ 8.2% this month</div>
+                                </div>
+                                <div class="metric-card" role="listitem">
+                                    <div class="metric-label">Response Time</div>
+                                    <div class="metric-value">12 ms</div>
+                                    <div class="metric-change">↓ 3ms better</div>
+                                </div>
+                                <div class="metric-card" role="listitem">
+                                    <div class="metric-label">API Requests</div>
+                                    <div class="metric-value">4.2M</div>
+                                    <div class="metric-change">Normal traffic</div>
+                                </div>
+                                <div class="metric-card" role="listitem">
+                                    <div class="metric-label">Bandwidth</div>
+                                    <div class="metric-value">2.3 Gbps</div>
+                                    <div class="metric-change negative">↓ 5% from peak</div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-main">
+                                <div class="activity-feed">
+                                    <div class="feed-header">
+                                        <span class="feed-title">Recent Activity</span>
+                                        <span class="feed-filter">View All →</span>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon" aria-hidden="true">📁</div>
+                                        <div class="activity-details">
+                                            <div class="activity-title">backup-2025-Q3.tar.gz uploaded</div>
+                                            <div class="activity-time">2 minutes ago • 42.3 GB</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon" aria-hidden="true">🔐</div>
+                                        <div class="activity-details">
+                                            <div class="activity-title">API key rotated for prod-api</div>
+                                            <div class="activity-time">1 hour ago • Scheduled</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon" aria-hidden="true">✅</div>
+                                        <div class="activity-details">
+                                            <div class="activity-title">Daily backup completed</div>
+                                            <div class="activity-time">3 hours ago • 287.4 TB processed</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon" aria-hidden="true">🔄</div>
+                                        <div class="activity-details">
+                                            <div class="activity-title">Replication to secondary DC</div>
+                                            <div class="activity-time">6 hours ago • Complete</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="storage-overview">
+                                    <div class="feed-header">
+                                        <span class="feed-title">Storage Distribution</span>
+                                    </div>
+                                    <div class="storage-chart" aria-label="Storage usage chart showing 57% used">
+                                        <div class="storage-bar"></div>
+                                    </div>
+                                    <div class="storage-details">
+                                        <div class="storage-item">
+                                            <span class="storage-label">Used</span>
+                                            <span class="storage-value">287.4 TB</span>
+                                        </div>
+                                        <div class="storage-item">
+                                            <span class="storage-label">Available</span>
+                                            <span class="storage-value">212.6 TB</span>
+                                        </div>
+                                        <div class="storage-item">
+                                            <span class="storage-label">Total Capacity</span>
+                                            <span class="storage-value">500 TB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works" id="how-it-works" style="padding: 5rem 2rem; background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);" aria-labelledby="how-it-works-heading">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">How It Works</span>
+                    <h2 id="how-it-works-heading" class="section-title">Enterprise Onboarding Process</h2>
+                    <p class="section-subtitle">
+                        Standard onboarding procedure for new enterprise clients. Typical timeline is 3 weeks from initial contact to production access.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start;">
+                    <div>
+                        <div style="margin-bottom: 3rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">
+                                1. Security & Compliance Review
+                            </h3>
+                            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+                                Security questionnaire and compliance requirements review.
+                                DPA and contracts typically processed within 3-5 business days.
+                            </p>
+                            <p style="color: var(--text-secondary); line-height: 1.7;">
+                                SOC 2 reports and architecture documentation provided upon request.
+                                Infrastructure audits available for qualified clients.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 3rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">
+                                2. Technical Integration
+                            </h3>
+                            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+                                Integration engineer assigned for initial setup. Configuration includes IAM policies,
+                                encryption keys, and network access controls.
+                            </p>
+                            <div style="background: var(--text-primary); color: white; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; margin-bottom: 1rem;">
+                                # Python SDK configuration<br>
+                                import boto3<br>
+                                s3 = boto3.client('s3', endpoint_url='https://api.vstorage.ch')
+                            </div>
+                            <p style="color: var(--text-secondary); line-height: 1.7;">
+                                S3-compatible API. Test environment available immediately.
+                                Production credentials issued after security review completion.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 3rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">
+                                3. Production Migration
+                            </h3>
+                            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+                                Production access granted after security checklist completion.
+                                Migration can be performed incrementally or in batch mode.
+                            </p>
+                            <p style="color: var(--text-secondary); line-height: 1.7;">
+                                Monitoring integration available via Prometheus endpoints.
+                                Support provided through designated channels: email, Slack, or Teams based on client preference.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow-lg);">
+                            <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem;">
+                                Security at Every Step
+                            </h4>
+
+                            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                                <div style="display: flex; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; min-width: 44px; min-height: 44px; background: var(--accent-ultra-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" aria-hidden="true">🔐</div>
+                                    <div>
+                                        <strong style="color: var(--text-primary);">Initial Setup</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">
+                                            Customer-managed encryption keys. Keys stored in client infrastructure.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; min-width: 44px; min-height: 44px; background: var(--accent-ultra-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" aria-hidden="true">🛡️</div>
+                                    <div>
+                                        <strong style="color: var(--text-primary);">Network Security</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">
+                                            VPN or private peering. IP whitelisting enforced.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; min-width: 44px; min-height: 44px; background: var(--accent-ultra-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" aria-hidden="true">✅</div>
+                                    <div>
+                                        <strong style="color: var(--text-primary);">Compliance Controls</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">
+                                            Swiss data residency. Audit logs available via API.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; min-width: 44px; min-height: 44px; background: var(--accent-ultra-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" aria-hidden="true">📊</div>
+                                    <div>
+                                        <strong style="color: var(--text-primary);">Monitoring</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">
+                                            Prometheus metrics endpoint. Custom alerting supported.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                                <h5 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                                    Typical Timeline
+                                </h5>
+
+                                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                    <div>
+                                        <strong style="color: var(--text-primary); font-size: 0.9rem;">Week 1</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                            Security review, contracts signed, test environment ready
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <strong style="color: var(--text-primary); font-size: 0.9rem;">Week 2</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                            Integration testing, performance validation, runbooks created
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <strong style="color: var(--text-primary); font-size: 0.9rem;">Week 3</strong>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                            Production access granted, initial migration begins
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--bg-primary); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem;">
+                            <h5 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                                Common Enterprise Questions
+                            </h5>
+
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <div>
+                                    <strong style="color: var(--text-primary); font-size: 0.9rem;">Do you have a BAA for HIPAA?</strong>
+                                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                        Yes. Standard BAA available for healthcare clients.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <strong style="color: var(--text-primary); font-size: 0.9rem;">What about data residency?</strong>
+                                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                        100% Swiss data centers. Data never leaves Switzerland.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <strong style="color: var(--text-primary); font-size: 0.9rem;">Can we audit your infrastructure?</strong>
+                                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                        Yes. Facility tours and architecture reviews available.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <strong style="color: var(--text-primary); font-size: 0.9rem;">SLA guarantees?</strong>
+                                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                        99.9% uptime SLA standard. Higher SLAs available.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <strong style="color: var(--text-primary); font-size: 0.9rem;">Maintenance windows?</strong>
+                                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+                                        Sundays 02:00-04:00 CET. Announced 7 days in advance.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="infrastructure" id="infrastructure" aria-labelledby="infrastructure-heading">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Infrastructure</span>
+                    <h2 id="infrastructure-heading" class="section-title">Technical Infrastructure</h2>
+                    <p class="section-subtitle">
+                        Dedicated servers in Zurich data centers. Direct peering with Swiss and European ISPs.
+                        Built for reliability and data sovereignty.
+                    </p>
+                </div>
+
+                <div class="infrastructure-grid">
+                    <div class="infrastructure-content">
+                        <h3>Production Environment</h3>
+                        <p>
+                            Dedicated server infrastructure across two geographically separated Zurich facilities.
+                            Full hardware isolation ensures consistent performance and security.
+                        </p>
+                        <p>
+                            Each location maintains complete data copies with automatic failover.
+                            Storage architecture uses erasure coding for efficiency while maintaining
+                            durability. Continuous monitoring with automated incident response.
+                        </p>
+
+                        <div class="infrastructure-stats">
+                            <div class="infra-stat">
+                                <div class="infra-stat-value">500 TB</div>
+                                <div class="infra-stat-label">Active Storage</div>
+                            </div>
+                            <div class="infra-stat">
+                                <div class="infra-stat-value">10 Gbps</div>
+                                <div class="infra-stat-label">Network Capacity</div>
+                            </div>
+                            <div class="infra-stat">
+                                <div class="infra-stat-value">2 Sites</div>
+                                <div class="infra-stat-label">Data Centers</div>
+                            </div>
+                            <div class="infra-stat">
+                                <div class="infra-stat-value">< 2ms</div>
+                                <div class="infra-stat-label">Regional Latency</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="network-diagram">
+                        <div class="network-nodes">
+                            <div class="network-node">
+                                <div class="node-icon" aria-hidden="true">🏢</div>
+                                <div class="node-title">Primary Site</div>
+                                <div class="node-status">● Zurich North</div>
+                            </div>
+                            <div class="network-node">
+                                <div class="node-icon" aria-hidden="true">🏢</div>
+                                <div class="node-title">Secondary Site</div>
+                                <div class="node-status">● Zurich West</div>
+                            </div>
+                            <div class="network-node">
+                                <div class="node-icon" aria-hidden="true">🔄</div>
+                                <div class="node-title">Load Distribution</div>
+                                <div class="node-status">● Active/Active</div>
+                            </div>
+                            <div class="network-node">
+                                <div class="node-icon" aria-hidden="true">🌐</div>
+                                <div class="node-title">Edge Cache</div>
+                                <div class="node-status">● 92% Hit Rate</div>
+                            </div>
+                            <div class="network-node">
+                                <div class="node-icon" aria-hidden="true">🛡️</div>
+                                <div class="node-title">Security Layer</div>
+                                <div class="node-status">● DDoS Protected</div>
+                            </div>
+                            <div class="network-node">
+                                <div class="node-icon" aria-hidden="true">📊</div>
+                                <div class="node-title">Monitoring</div>
+                                <div class="node-status">● Prometheus/Grafana</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="security-features" id="security" aria-labelledby="security-heading">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Security</span>
+                    <h2 id="security-heading" class="section-title">Security Architecture</h2>
+                    <p class="section-subtitle">
+                        Comprehensive security controls implemented across all layers.
+                        Swiss data protection standards with complete audit capabilities.
+                    </p>
+                </div>
+
+                <div class="security-grid">
+                    <article class="security-card">
+                        <div class="security-icon" aria-hidden="true">🔐</div>
+                        <h3 class="security-title">AES-256 Encryption</h3>
+                        <p class="security-desc">
+                            Industry standard encryption at rest and in transit. Proven cryptographic
+                            libraries with customer-managed keys. Data encrypted before storage.
+                        </p>
+                        <div class="security-specs">
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>At Rest:</strong> AES-256-GCM</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>In Transit:</strong> TLS 1.3 only</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Key Management:</strong> Per-customer keys</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="security-card">
+                        <div class="security-icon" aria-hidden="true">🛡️</div>
+                        <h3 class="security-title">Swiss Data Residency</h3>
+                        <p class="security-desc">
+                            Data remains exclusively in Switzerland. Incorporated and operated
+                            under Swiss law. No foreign jurisdiction access.
+                        </p>
+                        <div class="security-specs">
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Jurisdiction:</strong> Canton Zurich</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>No US Cloud Act:</strong> Guaranteed</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>GDPR+:</strong> Swiss FADP compliance</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="security-card">
+                        <div class="security-icon" aria-hidden="true">🔍</div>
+                        <h3 class="security-title">Audit Logging</h3>
+                        <p class="security-desc">
+                            Complete activity logging for all API operations. Append-only
+                            architecture prevents tampering. Real-time streaming to customer SIEM.
+                        </p>
+                        <div class="security-specs">
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Retention:</strong> 365 days minimum</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Format:</strong> JSON/Syslog</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Delivery:</strong> Real-time streaming</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="security-card">
+                        <div class="security-icon" aria-hidden="true">🚨</div>
+                        <h3 class="security-title">Threat Detection</h3>
+                        <p class="security-desc">
+                            Automated monitoring with anomaly detection. Prometheus metrics,
+                            Grafana dashboards, PagerDuty alerting. On-call rotation for incidents.
+                        </p>
+                        <div class="security-specs">
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Response Time:</strong> < 5 minutes</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Monitoring:</strong> Prometheus/Grafana</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Alerting:</strong> PagerDuty integration</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="security-card">
+                        <div class="security-icon" aria-hidden="true">🏛️</div>
+                        <h3 class="security-title">Backup & Recovery</h3>
+                        <p class="security-desc">
+                            Daily incremental, weekly full backups. Geographically distributed
+                            copies. Regular restore testing with documented RTO/RPO targets.
+                        </p>
+                        <div class="security-specs">
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>RPO:</strong> 1 hour maximum</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>RTO:</strong> 4 hours target</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>Locations:</strong> 2 separate sites</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="security-card">
+                        <div class="security-icon" aria-hidden="true">⚡</div>
+                        <h3 class="security-title">Access Controls</h3>
+                        <p class="security-desc">
+                            Multi-factor authentication required. Scoped API keys with
+                            automatic rotation. SSO integration via SAML 2.0.
+                        </p>
+                        <div class="security-specs">
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>MFA:</strong> TOTP/WebAuthn</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>SSO:</strong> SAML 2.0</span>
+                            </div>
+                            <div class="spec-item">
+                                <span aria-hidden="true">→</span>
+                                <span><strong>API Keys:</strong> Scoped & rotatable</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="architecture" id="architecture" aria-labelledby="architecture-heading">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Architecture</span>
+                    <h2 id="architecture-heading" class="section-title">Technical Stack</h2>
+                    <p class="section-subtitle">
+                        No proprietary magic, just proven open source tools configured properly.
+                        Here's exactly what's running your data right now.
+                    </p>
+                </div>
+
+                <div class="arch-visual">
+                    <div class="arch-layers">
+                        <div class="arch-layer">
+                            <span class="layer-label">API Layer</span>
+                            <div class="layer-content">
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🔌</div>
+                                    <span class="tech-name">S3 Compatible API</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">⚡</div>
+                                    <span class="tech-name">REST + gRPC</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🔄</div>
+                                    <span class="tech-name">WebDAV Support</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">📡</div>
+                                    <span class="tech-name">Rate Limiting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="arch-layer">
+                            <span class="layer-label">Storage Engine</span>
+                            <div class="layer-content">
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">💾</div>
+                                    <span class="tech-name">MinIO</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🗄️</div>
+                                    <span class="tech-name">PostgreSQL</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">⚡</div>
+                                    <span class="tech-name">Redis Cache</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🔄</div>
+                                    <span class="tech-name">Erasure Coding</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="arch-layer">
+                            <span class="layer-label">Infrastructure</span>
+                            <div class="layer-content">
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🐧</div>
+                                    <span class="tech-name">Ubuntu 22.04</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🐳</div>
+                                    <span class="tech-name">Docker Swarm</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">🔧</div>
+                                    <span class="tech-name">Terraform</span>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-icon" aria-hidden="true">📊</div>
+                                    <span class="tech-name">Prometheus</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="compliance" aria-labelledby="compliance-heading">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Compliance</span>
+                    <h2 id="compliance-heading" class="section-title">Compliance & Certifications</h2>
+                    <p class="section-subtitle">
+                        Current compliance status and certification roadmap. GDPR compliant since inception,
+                        SOC 2 Type I active.
+                    </p>
+                </div>
+
+                <div class="compliance-badges">
+                    <article class="compliance-badge">
+                        <div class="badge-icon" aria-hidden="true">🔒</div>
+                        <h3 class="badge-title">GDPR Compliant</h3>
+                        <p class="badge-desc">
+                            Full compliance with EU data protection regulations. DPA templates available.
+                        </p>
+                        <span class="badge-status">Active</span>
+                    </article>
+
+                    <article class="compliance-badge">
+                        <div class="badge-icon" aria-hidden="true">🇨🇭</div>
+                        <h3 class="badge-title">Swiss FADP</h3>
+                        <p class="badge-desc">
+                            Swiss Federal Data Protection Act compliance. Stricter than GDPR in key areas.
+                        </p>
+                        <span class="badge-status">Active</span>
+                    </article>
+
+                    <article class="compliance-badge">
+                        <div class="badge-icon" aria-hidden="true">📋</div>
+                        <h3 class="badge-title">SOC 2 Type I</h3>
+                        <p class="badge-desc">
+                            Security and availability controls audit. Annual review completed.
+                        </p>
+                        <span class="badge-status">Active</span>
+                    </article>
+
+                    <article class="compliance-badge">
+                        <div class="badge-icon" aria-hidden="true">🔐</div>
+                        <h3 class="badge-title">ISO 27001</h3>
+                        <p class="badge-desc">
+                            Information security management system. Planned for 2026-2027.
+                        </p>
+                        <span class="badge-status badge-pending">Planned</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="documentation" id="docs" style="padding: 5rem 2rem; background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);" aria-labelledby="docs-heading">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Documentation</span>
+                    <h2 id="docs-heading" class="section-title">Technical Resources</h2>
+                    <p class="section-subtitle">
+                        Developer documentation for our S3-compatible storage API.
+                        Complete reference materials available after account verification.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        Platform v2.3.1 • Last updated: September 2025
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                    <article style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s ease;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1.5rem;" aria-hidden="true">
+                            📄
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">API Reference v2.1</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                            S3-compatible REST API covering 47 supported endpoints. Multipart uploads up to 10,000 parts. Max single object: 5TB, max upload: 500GB. Note: S3 Select and Glacier transitions not supported.
+                        </p>
+                    </article>
+
+                    <article style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s ease;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1.5rem;" aria-hidden="true">
+                            ▶
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">Quick Start Guide</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                            Most clients uploading within 45 minutes. Skip the theory, start with a test bucket. Assumes Python 3.8+ or Go 1.19+. Windows users need WSL2.
+                        </p>
+                    </article>
+
+                    <article style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s ease;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1.5rem;" aria-hidden="true">
+                            💻
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">SDKs & Client Libraries</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                            Python SDK (v1.2, stable). Go SDK (v1.1, stable). Java SDK still in beta - works but no promises. CLI requires macOS/Linux, bash 4+.
+                        </p>
+                    </article>
+
+                    <article style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s ease;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1.5rem;" aria-hidden="true">
+                            🔒
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">Security & Compliance</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                            How we implement AES-256-GCM, customer key management (our KMS, not AWS), and why we log everything twice. Includes GDPR data handling specifics.
+                        </p>
+                    </article>
+
+                    <article style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s ease;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1.5rem;" aria-hidden="true">
+                            🔧
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">Integration Guides</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                            Terraform modules (v1.5+ tested), basic K8s manifests (not a full operator yet), Docker Compose that actually works. GitHub Actions examples included.
+                        </p>
+                    </article>
+
+                    <article style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s ease;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-bottom: 1.5rem;" aria-hidden="true">
+                            📊
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">Operations Manual</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                            Prometheus exporters setup, our backup strategy (spoiler: rsync + snapshots), and what to do when MinIO acts weird. Real runbooks from real incidents.
+                        </p>
+                    </article>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-primary); border-radius: 16px; text-align: center; border: 1px solid var(--border);">
+                    <p style="color: var(--text-secondary); font-size: 1rem; margin: 0 0 0.5rem 0;">
+                        Complete documentation available after account verification.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+                        Email security@vstorage.ch for access. Response within 24 hours.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" style="padding: 2.5rem 2rem; background: var(--text-primary); color: white;" role="contentinfo">
+        <div style="max-width: 1400px; margin: 0 auto; text-align: center;">
+            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; margin: 0 0 0.75rem 0;">
+                vStorage GmbH • Hardstrasse 201, 8005 Zurich, Switzerland • contact@vstorage.ch
+            </p>
+            <div style="padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin: 0;">
+                    © 2023-2025 vStorage GmbH
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
